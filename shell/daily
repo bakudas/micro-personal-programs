@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+# [c00] @bakudas
+# small daily utils
+#
+# daily
+# quick daily note creator
+
+# sst
+now=$(date +%d%m%Y)
+note_dir="$HOME/notes/dailies"
+note="$note_dir/daily_$now.md"
+editor="${EDITOR:-vim}"
+
+# cria o diretório se não existir
+mkdir -p $note_dir
+
+# cria a nota com base no template
+if [[ ! -f "$note" ]]; then
+	echo "---
+date: $now
+tags: daily, notes
+---
+
+# Daily Note $(date +%d/%m/%Y)
+
+## Notas importantes
+*[ideias avulsas, resumo do dia, leituras]*
+
+
+## Pensamentos
+*[o que eu aprendi hoje? alguma coisa surpreendente?]*
+
+
+## Compartilhamentos
+- ...
+
+
+" > "$note"
+
+fi
+
+"$editor" "$note"

@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+# [c00] @bakudas
+# small daily utils
+#
+# note
+# quick floating notes
+
+# sst
+now=$(date +%d%m%Y%H%M)
+note_dir="$HOME/notes/fleets"
+note="$note_dir/note_$now.md"
+editor=${EDITOR:-vim}
+
+# cria o diretório se não existir
+mkdir -p $note_dir
+
+# cria a nota baseado template
+if [[ ! -f "$note" ]]; then
+	echo "---
+date: $now
+tags: [fleets, draft]
+---
+
+# Nota Flutuante $now
+
+## Pensamento
+*[escrever algo expontâneo]*
+
+
+## Contexto
+*[de onde veio ou qual foi o gatilho]*
+
+
+## Próximos Passos
+[  ] ...
+
+
+" > "$note"
+fi
+
+# abre a nota para edição
+$editor "$note"
